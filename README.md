@@ -1,60 +1,31 @@
-# ansible_docker_lab
+# Projet de Labs Ansible
 
+Bienvenue dans ce projet de **labs Ansible**.  
+Ce dépôt vous guide **étape par étape** pour mettre en place un **environnement de labs Ansible** prêt à l’emploi.
 
+## Structure du projet
 
-## Getting started
+- Le répertoire [`labs/`](./labs) contient **les énoncés et exercices** que vous devrez réaliser.
 
-To make it easy for you to get started with this lab, here's a list of recommended next steps.
+## Comment exécuter les labs ?
 
+### 1. Forker le projet
 
-## build and configure your envirement
+Avant de commencer, vous devez forker ce dépôt sur votre propre compte GitHub :
 
+- Cliquez sur le bouton **Fork** en haut à droite de la page du projet.
+- Choisissez votre compte GitHub comme destination.
 
+### 2. Ouvrir un CodeSpace
 
-```
-cd existing_repo
-```
- use docker-compose if you use the python version of docker compose
-```
-docker compose up -d --build
-docker network inspect ansible_docker_lab_my_network
-IP1=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ansible_node1)
-IP2=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ansible_node2)
-```
-edit the inventory file with the ip@ of the tow nodes
-```
-sed -i "s/ipNode1/$IP1/g; s/ipNode2/$IP2/g" inventory
-```
-edit the myscript.sh with the ip@ of the nodes
-```
-sed -i "s/ipNode1/$IP1/g; s/ipNode2/$IP2/g" myscript.sh
-```
-copy the inventoty file into ansible-server container
-copy the myscript file into ansible-server container
-```
-./copytocontainer.sh
+Pour exécuter votre environnement de labs directement dans le cloud, utilisez **GitHub Codespaces** :
 
-```
-execute the copy of the public key to the nodes
-```
-docker compose exec -it ansible-manager ./myscript.sh
-```
-test ansible ping
-```
-docker compose exec -it ansible-manager ansible -i inventory node -m ping
+#### Étapes pour ouvrir un Codespace :
 
-```
-install nginx on the nodes with the PASSWORD: password
-```
-docker cp install_nginx.yml ansible_server:/
-docker compose exec ansible-manager ansible-playbook -i inventory install_nginx.yml --ask-become-pass
-```
-start the nginx servers on the nodes 
-```
-docker cp start_nginx.yml ansible_server:/
-docker compose exec ansible-manager ansible-playbook -i inventory start_nginx.yml --ask-become-pass
-```
-test the acces to nginx on the nodes 
-```
- curl $IP1:8080
- curl $IP2:8080
+1. Allez sur **votre fork** du projet.
+2. Cliquez sur le bouton vert **<> Code**.
+3. Dans l'onglet **Codespaces**, cliquez sur **Create codespace on main**.
+4. Patientez quelques instants pendant que l'environnement se prépare automatiquement.
+5. Une fois prêt, votre environnement de travail Ansible est opérationnel !
+
+> **Remarque :** Le Codespace est préconfiguré pour exécuter les labs sans nécessiter d'installation locale sur votre machine.
