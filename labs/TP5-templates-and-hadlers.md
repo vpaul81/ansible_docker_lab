@@ -104,3 +104,21 @@ return 200 'Handler triggered successfully!';
 ```
 Rejouez le playbook :
 Vérifiez que le handler a été exécuté et que la configuration est mise à jour.
+
+## 🔥 Challenge supplémentaire : Amélioration du Playbook
+
+Améliorez votre solution actuelle en remplaçant l'utilisation du module `copy` par le module `template` :
+
+- Utilisez le module **`ansible.builtin.template`** pour déployer un fichier de configuration dynamique.
+- Déplacez le fichier `nginx.conf` existant dans un nouveau fichier de template : `templates/nginx.conf.j2`.
+- Rendez ce fichier **dynamique** en utilisant **au moins deux variables** :
+  - `nginx_listen_port` : pour définir le **port d'écoute** du serveur Nginx.
+  - `nginx_server_message` : pour définir le **message retourné** par le serveur web.
+
+Le fichier `/etc/nginx/nginx.conf` généré doit s'adapter automatiquement aux valeurs des variables.
+
+> **Objectif** :  
+> - Faciliter les changements futurs de port et de message sans modifier le template.
+> - Rendre votre playbook plus flexible et maintenable.
+
+✅ Pensez à rejouer votre playbook pour vérifier que :
